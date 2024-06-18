@@ -49,7 +49,7 @@
       "location": "[resourceGroup().location]",
       "kind": "app",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', concat(parameters('webAppName'), 'ServicePlan'))]"
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'ContactDatabaseAppServicePlan')]"
       }
     },
     {
