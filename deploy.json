@@ -4,7 +4,7 @@
   "parameters": {
     "webAppName": {
       "type": "string",
-      "defaultValue": "ContactDatabaseApp",
+      "defaultValue": "ContactDatabaseAppis",
       "metadata": {
         "description": "Name of the Azure Web App"
       }
