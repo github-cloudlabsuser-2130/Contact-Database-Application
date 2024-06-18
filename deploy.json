@@ -27,6 +27,22 @@
   "variables": {},
   "resources": [
     {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2018-02-01",
+      "name": "ContactDatabaseAppServicePlan",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "F1",
+        "capacity": 1
+      },
+      "properties": {
+        "name": "ContactDatabaseAppServicePlan",
+        "workerSize": "0",
+        "workerSizeId": "0",
+        "numberOfWorkers": "1"
+      }
+    },
+    {
       "type": "Microsoft.Web/sites",
       "apiVersion": "2018-11-01",
       "name": "[parameters('webAppName')]",
