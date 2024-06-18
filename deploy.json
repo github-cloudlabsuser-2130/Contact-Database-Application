@@ -24,9 +24,7 @@
       }
     }
   },
-  "variables": {
-    // Define any variables here
-  },
+  "variables": {},
   "resources": [
     {
       "type": "Microsoft.Web/sites",
@@ -59,7 +57,7 @@
           "properties": {
             "collation": "SQL_Latin1_General_CP1_CI_AS",
             "edition": "Basic",
-            "maxSizeBytes": "2147483648",
+            "maxSizeBytes": 2147483648,
             "requestedServiceObjectiveName": "Basic"
           }
         }
@@ -67,6 +65,17 @@
     }
   ],
   "outputs": {
-    // Define any outputs here
+    "webAppName": {
+      "type": "string",
+      "value": "[parameters('webAppName')]"
+    },
+    "sqlServerName": {
+      "type": "string",
+      "value": "[parameters('sqlServerName')]"
+    },
+    "sqlDatabaseName": {
+      "type": "string",
+      "value": "[parameters('sqlDatabaseName')]"
+    }
   }
 }
