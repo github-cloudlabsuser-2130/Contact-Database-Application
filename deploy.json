@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "ContactDatabaseApp",
+      "metadata": {
+        "description": "Name of the Azure Web App"
+      }
+    },
+    "sqlServerName": {
+      "type": "string",
+      "defaultValue": "ContactDbServer",
+      "metadata": {
+        "description": "Name of the Azure SQL Server"
+      }
+    },
+    "sqlDatabaseName": {
+      "type": "string",
+      "defaultValue": "ContactDatabase",
+      "metadata": {
+        "description": "Name of the Azure SQL Database"
+      }
+    }
+  },
+  "variables": {
+    // Define any variables here
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2018-11-01",
+      "name": "[parameters('webAppName')]",
+      "location": "[resourceGroup().location]",
+      "kind": "app",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', concat(parameters('webAppName'), 'ServicePlan'))]"
+      }
+    },
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[parameters('sqlServerName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "administratorLogin": "sqladmin",
+        "administratorLoginPassword": "YourStrongPassword1!"
+      },
+      "resources": [
+        {
+          "type": "databases",
+          "apiVersion": "2019-06-01-preview",
+          "name": "[parameters('sqlDatabaseName')]",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
+          ],
+          "properties": {
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "edition": "Basic",
+            "maxSizeBytes": "2147483648",
+            "requestedServiceObjectiveName": "Basic"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    // Define any outputs here
+  }
+}
